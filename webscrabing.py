@@ -55,3 +55,59 @@ for hotel_price in hotel_prices:
 		print("New price:\t", hotel_price.find('ins').string)
 	else:
 		print("Originale price:\t", hotel_price.find('strong').string)
+
+
+
+
+
+# testing with scrapy 
+
+# def parse1(self, response):
+#     	try:
+#     		location = response.xpath("//div[@class='summary']/h1//text()").get()
+    	
+# 	    	location = location.split(',')
+# 	    	country = location[-1]
+	    	
+# 	    	for node in  response.xpath("//div[@id='listings']/ol/li/article/section").getall():
+# 	    		node = Selector(text=node)
+	    		
+#     			price = node.xpath("//aside/div[@class='price']/strong//text()").get()
+    		
+# 	    		if price is not None:
+# 	    			price
+# 	    		else:
+# 	    			price = node.xpath("//aside/div/ins//text()").get()
+# 	    		yield {
+# 	                'name': node.xpath("//div/h3/a//text()").get(),
+# 	                'address': node.xpath("//div/address/span//text()").get(),
+# 	                'rating': node.xpath("//div/div/div/strong//text()").get(),
+# 	                'price' : price,
+# 	                'country' : country,
+# 	                'city' : city
+# 	            }
+#     	except Exception as e:
+#     		print(e)
+
+
+
+
+# save it into database  start code
+    # def parse(self, response):
+    # 	product = WebscrabingItem()
+    # 	for hole_page in response.xpath("//div[@id='listings']/ol/li/article/section").getall():
+    # 		div = Selector(text=hole_page)
+    # 		product['name'] = div.xpath("//div/h3/a//text()").get()
+    # 		product['address'] = div.xpath("//div/address/span//text()").get()
+    # 		product['rating'] = div.xpath("//div/div/div/strong//text()").get()
+    # 		product['price'] = div.xpath("//aside/div/strong//text()").get()
+    # 		yield product
+
+    # end code 
+
+    		# yield {
+      #           'name': div.xpath("//div/h3/a//text()").get(),
+      #           'address': div.xpath("//div/address/span//text()").get(),
+      #           'rating': div.xpath("//div/div/div/strong//text()").get(),
+      #           'price' : div.xpath("//aside/div/strong//text()").get()
+      #       }
