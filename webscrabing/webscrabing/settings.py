@@ -16,7 +16,7 @@ NEWSPIDER_MODULE = 'webscrabing.spiders'
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-#USER_AGENT = 'webscrabing (+http://www.yourdomain.com)'
+USER_AGENT = 'webscrabing (+https://in.hotels.com)'
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = True
@@ -46,9 +46,9 @@ ROBOTSTXT_OBEY = True
 
 # Enable or disable spider middlewares
 # See https://docs.scrapy.org/en/latest/topics/spider-middleware.html
-#SPIDER_MIDDLEWARES = {
-#    'webscrabing.middlewares.WebscrabingSpiderMiddleware': 543,
-#}
+SPIDER_MIDDLEWARES = {
+   'webscrabing.middlewares.WebscrabingSpiderMiddleware': 543,
+}
 
 # Enable or disable downloader middlewares
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
@@ -64,12 +64,12 @@ ROBOTSTXT_OBEY = True
 
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
-ITEM_PIPELINES = {
-   'webscrabing.pipelines.WebscrabingPipeline':300,
-}
+# ITEM_PIPELINES = {
+#    'webscrabing.pipelines.WebscrabingPipeline':300,
+# }
 
-MONGO_URI = 'mongodb://localhost:27017'
-MONGO_DATABASE = 'hoteldetails'
+# MONGO_URI = 'mongodb://localhost:27017'
+# MONGO_DATABASE = 'hoteldetails'
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html
