@@ -15,7 +15,7 @@ class BookingspiderSpider(scrapy.Spider):
 
         # request =  scrapy.Request(url='https://www.booking.com/hotel/de/hilton-munich-park.html',
         # 					       callback=self.get_booking_data)
-        second_request = scrapy.Request(url='https://www.booking.com/hotel/de/the-stay-residence.en-gb.html',
+        second_request = scrapy.Request(url='https://www.booking.com/hotel/de/city-aparthotel.en-gb.html',
                                     callback=self.booking_image)
         second_request.headers['USER-AGENT'] = user_agent
         yield second_request
@@ -81,28 +81,22 @@ class BookingspiderSpider(scrapy.Spider):
         actual_image_list = hotel_image_list[start_range:end_range]
         actual_image_list = actual_image_list.replace("\n", "")
 
-        cleaned_image_list = actual_image_list.replace('thumb_contains', '"thumb_contains"', 1).replace('thumb_className', '"thumb_className"', 1).replace('verticalAlign', '"verticalAlign"').replace('className:', '"className":', 1).replace('contains:', '"contains":',1).replace('id:', '"id":').replace('thumb_url', '"thumb_url"').replace('created', '"created"').replace('large_url', '"large_url"').replace("highres_url", '"highres_url"').replace("associated_rooms", '"associated_rooms"').replace("orientation", '"orientation"').replace('class="', "").replace('closedlock"', "").replace("'", '"').replace("}],", "}]")
-        file = open("booking.json", 'wb')
-        file_html = open("booking_file.html", 'wb')
-        file_html.write(bytes(cleaned_image_list, 'utf-8'))
-        file_html.close()
+        cleaned_image_list = actual_image_list.replace('thumb_contains', '"thumb_contains"', 1).replace('thumb_className', '"thumb_className"', 1).replace('verticalAlign', '"verticalAlign"').replace('className:', '"className":', 1).replace('contains:', '"contains":',1).replace('id:', '"id":').replace('thumb_url', '"thumb_url"').replace('created', '"created"').replace('large_url', '"large_url"').replace("highres_url", '"highres_url"').replace("associated_rooms", '"associated_rooms"').replace("orientation", '"orientation"').replace('class="', "").replace('closedlock"', "").replace("'", '"').replace("}],", "}]")       
             
-
+        image_years = []
         for image_list in [cleaned_image_list]:
             json_data = json.loads(image_list)
-            file.write(bytes(image_list, 'utf-8'))
-            file.close()
-            print("image_count : " , len(json_data))
+            image_count = len(json_data) - 1
+            print("image_count : " , image_count)
             for image in json_data:
-                try:
-                    image_years = ';'.join([str(datetime.strptime(image['created'], "%Y-%m-%d %H:%M:%S").year)])
-                    print("Image Years : ", image_years)
-                except KeyError:
-                    pass
-
+                if 'created' in image:
+                    image_year = ';'.join([str(datetime.strptime(image['created'], "%Y-%m-%d %H:%M:%S").year)])
+                    image_years.append(image_year)
+        print("Image Years : ", image_years)
 
 
         # rating_list = data.xpath('//span[contains(@class, "hp__hotel_ratings__stars")]')
+        # print("<<<<<<<<<<<<<<<<<<<rating_list>>>>>>>>>>>>>>>>>", rating_list)
         # for rating in rating_list:
         #     if rating.xpath('i[contains(@class, "\nbk-icon-wrapper")]/svg/path'):
         #         rating_star = rating.xpath('i[contains(@class, "\nbk-icon-wrapper")]/span[contains(@class, "invisible_spoken")]/text()')
